@@ -1,0 +1,37 @@
+.wrap { display:flex; flex-direction:column; gap:10px; }
+.skBox {
+  background:linear-gradient(90deg,var(--bg-card) 0%,rgba(249,115,22,.05) 50%,var(--bg-card) 100%);
+  background-size:700px 100%; animation:shimmer 1.6s infinite linear; border-radius:6px;
+}
+.aiSkeleton {
+  background:linear-gradient(135deg,rgba(249,115,22,.05),var(--bg-card));
+  border:1px solid rgba(249,115,22,.18); border-radius:var(--radius-lg);
+  padding:16px 18px; animation:fadeUp .3s ease;
+}
+.skHeader  { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.skIconBox { width:26px; height:26px; border-radius:8px; flex-shrink:0; }
+.skLabel   { width:88px; height:13px; }
+.skBadge   { width:72px; height:17px; border-radius:99px; }
+.skLines   { display:flex; flex-direction:column; gap:9px; margin-bottom:14px; }
+.skLine    { height:12px; }
+.w90{width:90%} .w85{width:85%} .w75{width:75%} .w70{width:70%} .w65{width:65%}
+.loadingMsg {
+  display:flex; align-items:center; gap:8px; padding:9px 12px;
+  background:rgba(255,255,255,.03); border-left:2px solid var(--saffron); border-radius:0 8px 8px 0;
+}
+.spinner {
+  width:13px; height:13px; border-radius:50%;
+  border:2px solid rgba(249,115,22,.3); border-top-color:var(--saffron);
+  animation:spin .8s linear infinite; flex-shrink:0;
+}
+.msgText { font-size:.79rem; color:var(--text-muted); }
+.resultSkeleton {
+  background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
+  padding:14px 16px; display:flex; flex-direction:column; gap:8px;
+  animation:fadeUp .35s ease both;
+}
+.skFavicon { width:16px; height:16px; border-radius:4px; flex-shrink:0; }
+.skDomain  { width:120px; height:11px; }
+.skTitle   { width:75%; height:15px; border-radius:4px; }
+.skUrl     { width:50%; height:10px; border-radius:99px; }
+.skDesc    { height:11px; }

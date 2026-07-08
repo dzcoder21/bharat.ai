@@ -1,0 +1,114 @@
+/* ── Shimmer animation ───────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Wrap ────────────────────────────────────────────────── */
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* ── Skeleton Box Base ───────────────────────────────────── */
+.skBox {
+  background: linear-gradient(
+    90deg,
+    var(--card-bg) 0%,
+    rgba(255,107,53,0.06) 40%,
+    var(--card-bg) 80%
+  );
+  background-size: 600px 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: 6px;
+}
+
+/* ── AI Skeleton ─────────────────────────────────────────── */
+.aiSkeleton {
+  background: linear-gradient(135deg, rgba(255,107,53,0.04), rgba(26,30,50,0.95));
+  border: 1px solid rgba(255,107,53,0.2);
+  border-radius: 16px;
+  padding: 18px 20px;
+  animation: fadeSlideIn 0.3s ease;
+}
+
+.skHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.skIconBox  { width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0; }
+.skLabel    { width: 90px; height: 14px; }
+.skBadge    { width: 70px; height: 18px; border-radius: 20px; }
+
+.skLines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.skLine { height: 13px; }
+.w90    { width: 90%; }
+.w85    { width: 85%; }
+.w75    { width: 75%; }
+.w70    { width: 70%; }
+.w65    { width: 65%; }
+.w60    { width: 60%; }
+
+.loadingMsg {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.03);
+  border-left: 2px solid var(--saffron);
+  border-radius: 0 8px 8px 0;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,107,53,0.3);
+  border-top-color: var(--saffron);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+.msgText {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+/* ── Result Skeleton ─────────────────────────────────────── */
+.resultSkeleton {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeSlideIn 0.35s ease both;
+}
+
+.skFavicon  { width: 16px;  height: 16px; border-radius: 3px; flex-shrink: 0; }
+.skDomain   { width: 120px; height: 12px; }
+.skTitle    { width: 80%;   height: 16px; border-radius: 4px; }
+.skUrl      { width: 55%;   height: 11px; border-radius: 20px; }
+.skDesc     { height: 12px; }
