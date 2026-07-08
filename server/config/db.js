@@ -1,14 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(
-      process.env.MONGODB_URI || 'mongodb://localhost:27017/bharatai',
-      { serverSelectionTimeoutMS: 5000 }
-    );
-    console.log(`✅ MongoDB: ${conn.connection.host}`);
+    await mongoose.connect(process.env.MONGODB_URI);
+
+    console.log("✅ MongoDB Connected");
   } catch (err) {
-    console.warn('⚠️  MongoDB offline — history/trending disabled');
+    console.error("❌ MongoDB Connection Error:", err.message);
+    process.exit(1);
   }
 };
 
