@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: bharat-ai-server
+    env: node
+    region: singapore       # Closest free region to India
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: GROQ_API_KEY
+        sync: false         # Add manually in Render dashboard
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: BRAVE_API_KEY
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: CLIENT_URL
+        sync: false         # Set to your Vercel URL after deploying frontend
