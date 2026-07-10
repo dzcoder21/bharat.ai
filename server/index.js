@@ -34,11 +34,3 @@ app.listen(PORT, () => {
   console.log(`\n🚀 Bharat.AI v4.0 → http://localhost:${PORT}`);
   console.log(`🤖 Providers: Claude:${p.claude?'✅':'❌'} OpenAI:${p.openai?'✅':'❌'} Groq:${p.groq?'✅':'❌'} Gemini:${p.gemini?'✅':'❌'}\n`);
 });
-
-app.use(cors({
-  origin: true,
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
-app.options('*', cors());
