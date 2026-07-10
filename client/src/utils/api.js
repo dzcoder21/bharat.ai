@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const api = axios.create({ baseURL: process.env.REACT_APP_API_URL || '/api', timeout: 20000 });
+const api = axios.create({ baseURL: process.env.REACT_APP_API_URL || '/api', timeout: 90000 });
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('bharat_token');
@@ -15,14 +15,13 @@ api.interceptors.response.use(res => res, err => {
   return Promise.reject(err);
 });
 
-// Two-stage search — quick shows results fast, enrich fills in AI answer
 export const quickSearch  = (q) => api.get('/search/quick',  { params:{q}, timeout: 90000 }).then(r=>r.data);
-export const enrichSearch = (q) => api.get('/search/enrich', { params:{q}, timeout: 20000 }).then(r=>r.data);
-export const search       = (q) => api.get('/search',        { params:{q}, timeout: 30000 }).then(r=>r.data);
+export const enrichSearch = (q) => api.get('/search/enrich', { params:{q}, timeout: 60000 }).then(r=>r.data);
+export const search       = (q) => api.get('/search',        { params:{q}, timeout: 90000 }).then(r=>r.data);
 
-export const autocomplete  = (q)  => api.get('/search/autocomplete', { params:{q}, timeout: 5000 }).then(r=>r.data);
+export const autocomplete  = (q)  => api.get('/search/autocomplete', { params:{q}, timeout: 10000 }).then(r=>r.data);
 export const generateImage = (prompt, seed, force) =>
-  api.get('/search/generate-image', { params: { prompt, seed, force: force ? 1 : undefined }, timeout: 12000 }).then(r => r.data);
+  api.get('/search/generate-image', { params: { prompt, seed, force: force ? 1 : undefined }, timeout: 30000 }).then(r => r.data);
 export const getHistory    = ()   => api.get('/search/history').then(r=>r.data.history||[]);
 export const clearHistory  = ()   => api.delete('/search/history').then(r=>r.data);
 export const deleteHistory = (id) => api.delete(`/search/history/${id}`).then(r=>r.data);
