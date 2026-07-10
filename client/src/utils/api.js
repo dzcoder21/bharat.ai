@@ -16,7 +16,7 @@ api.interceptors.response.use(res => res, err => {
 });
 
 // Two-stage search — quick shows results fast, enrich fills in AI answer
-export const quickSearch  = (q) => api.get('/search/quick',  { params:{q}, timeout: 60000 }).then(r=>r.data);
+export const quickSearch  = (q) => api.get('/search/quick',  { params:{q}, timeout: 90000 }).then(r=>r.data);
 export const enrichSearch = (q) => api.get('/search/enrich', { params:{q}, timeout: 20000 }).then(r=>r.data);
 export const search       = (q) => api.get('/search',        { params:{q}, timeout: 30000 }).then(r=>r.data);
 
