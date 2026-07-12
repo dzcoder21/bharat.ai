@@ -1,14 +1,3 @@
-/**
- * SearchOrchestrator v5 — Two-stage fast architecture
- *
- *  quickSearch()  → QueryAgent + WebFetchAgent only. Target: <2s.
- *                    Returns web/news/image results immediately.
- *  enrichSearch() → AnswerAgent + RankAgent + RelatedAgent.
- *                    Called separately by the frontend right after quickSearch
- *                    so the AI answer "fills in" without blocking first paint.
- *
- * No wasteful re-fetching — a single web fetch per query, ever.
- */
 
 const { runQueryAgent }    = require('../agents/queryAgent');
 const { runWebFetchAgent } = require('../agents/webFetchAgent');
@@ -29,10 +18,16 @@ async function quickSearch(rawQuery) {
 
   const start = Date.now();
 
-  const [queryObj, webData, existingGenerated] = await Promise.all([
-    runQueryAgent(rawQuery),
-    runWebFetchAgent({ cleanQuery: rawQuery }, ['web', 'news', 'images', 'videos']),
-    GeneratedImage.findOne({ query: rawQuery.toLowerCase().trim() }).catch(() => null),
+  const [queryObj, webData] = await Promise.all([
+  runQueryAgent(rawQuery).catch(() => ({
+    language: 'english', intent: 'informational',
+    cleanQuery: rawQuery,
+    expandedQueries: [rawQuery], entities: {},
+    tabs: ['web','news'], timeContext: 'any', _agent: 'fallback'
+  })),
+  runWebFetchAgent({ cleanQuery: rawQuery }, ['web','news','images']).catch(() => ({
+    web: [], news: [], images: [], videos: []
+  })),
   ]);
 
   const totalCount = (webData.web?.length || 0) + (webData.news?.length || 0);
