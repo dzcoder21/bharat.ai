@@ -36,7 +36,7 @@ exports.generateImage = async (req, res) => {
   }
 };
 
-// ── GET /api/search/quick — fast path, target <2s ──────────────────────────
+
 exports.quickSearch = async (req, res) => {
   const { q } = req.query;
   if (!q || !q.trim()) return res.status(400).json({ error: 'Query required' });
@@ -45,7 +45,13 @@ exports.quickSearch = async (req, res) => {
     return res.json(result);
   } catch (err) {
     console.error('Quick search error:', err.message);
-    return res.status(500).json({ error: 'Search failed. Please try again.' });
+    
+    return res.json({
+      query: q, cleanQuery: q, webResults: [], newsResults: [],
+      imageResults: [], videoResults: [], resultCount: 0,
+      hasResults: false, aiAnswer: null, tabs: ['web', 'news'],
+      error: err.message,
+    });
   }
 };
 

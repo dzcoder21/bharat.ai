@@ -74,10 +74,16 @@ async function enrichSearch(rawQuery) {
   // Bridge expired or missing → rebuild minimally (rare, e.g. direct API hit)
   if (!bridge) {
     const [queryObj, webData] = await Promise.all([
-      runQueryAgent(rawQuery),
-      runWebFetchAgent({ cleanQuery: rawQuery }, ['web', 'news', 'images', 'videos']),
-    ]);
-    bridge = { queryObj, webData };
+    runQueryAgent(rawQuery).catch(() => ({
+      language: 'english', intent: 'informational',
+      cleanQuery: rawQuery, expandedQueries: [rawQuery],
+      entities: {}, tabs: ['web', 'news'],
+      timeContext: 'any', _agent: 'fallback',
+      })),
+    runWebFetchAgent({ cleanQuery: rawQuery }, ['web', 'news', 'images', 'videos']).catch(() => ({
+      web: [], news: [], images: [], videos: [],
+    })),
+  ]);
   }
   const { queryObj, webData } = bridge;
 
